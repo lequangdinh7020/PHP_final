@@ -1,7 +1,7 @@
 @props(['course'])
 
 <div {{ $attributes->merge(['class' => 'bg-white border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col h-full group transform hover:-translate-y-1']) }}>
-    <a href="{{ route('course.show', $course->id) }}" class="block relative overflow-hidden">
+    <a href="{{ route('course.show', $course->slug) }}" class="block relative overflow-hidden">
         @php
             $videoId = '';
             $thumbnailUrl = asset('images/placeholder-video.jpg'); // Ảnh nền mặc định nếu không có video
@@ -33,7 +33,7 @@
     <div class="p-5 flex-1 flex flex-col">
         <div class="flex-1">
             <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 group-hover:text-indigo-600 transition-colors duration-300">
-                <a href="{{ route('course.show', $course->id) }}">{{ $course->name ?? 'Không có tên khóa học' }}</a>
+                <a href="{{ route('course.show', $course->slug) }}">{{ $course->name ?? 'Không có tên khóa học' }}</a>
             </h3>
             
             <div class="flex items-center text-sm text-gray-600 mb-3">
@@ -82,7 +82,7 @@
         
         <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
             <p class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">{{ number_format($course->price) }} VND</p>
-            <a href="{{ route('course.show', $course->id) }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800 flex items-center group">
+            <a href="{{ route('course.show', $course->slug) }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800 flex items-center group">
                 Chi tiết
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

@@ -13,14 +13,19 @@ use Illuminate\View\View;
 class CourseController extends Controller
 {
     // Course detail
-    public function show($course_id): View
-    {
-        $course = Course::with(['category', 'coursedetails'])->notDeleted()
-            ->findOrFail($course_id);
+    // public function show($course_id): View
+    // {
+    //     $course = Course::with(['category', 'coursedetails'])->notDeleted()
+    //         ->findOrFail($course_id);
 
+    //     return view('course.show', compact('course'));
+    // }
+
+    public function show(Course $course)
+    {
+        // Laravel automatically found the product matching the slug in the URL!
         return view('course.show', compact('course'));
     }
-
 
     public function search(Request $request)
     {

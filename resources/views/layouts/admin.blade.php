@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Icon -->
+    <link rel="icon" type="image" href="{{ asset('favicon.webp') }}">
     <title>Admin - @yield('title')</title>
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -60,34 +62,49 @@
                 <h2 class="text-xl font-bold text-white tracking-wide">Admin Panel</h2>
             </div>
             <div class="p-4">
-                <div class="mb-6 flex items-center space-x-3 p-3 rounded-lg bg-gradient-to-r from-purple-50 to-indigo-50">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center text-white">
+                <div
+                    class="mb-6 flex items-center space-x-3 p-3 rounded-lg bg-gradient-to-r from-purple-50 to-indigo-50">
+                    <div
+                        class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center text-white">
                         <i class="fas fa-user"></i>
                     </div>
                     <div>
-                        <p class="text-sm font-medium text-gray-900">Administrator</p>
+                        <p class="text-sm font-medium text-gray-900">
+                            {{ Auth::user()->name ?? 'Administrator' }}
+                        </p>
                         <p class="text-xs text-gray-500">Online</p>
                     </div>
                 </div>
                 <ul class="space-y-2">
                     <li>
+                        <a href="{{ route('admin.users.index') }}"
+                            class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-all duration-200 {{ request()->routeIs('admin.users') ? 'bg-purple-100 text-purple-700 shadow-sm' : 'text-gray-700' }}">
+                            <i
+                                class="fa-solid fa-cube w-5 h-5 mr-3 {{ request()->routeIs('admin.users.*') ? 'text-purple-600' : 'text-gray-500' }}"></i>
+                            <span class="text-sm font-medium">Users</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('admin.orders') }}"
                             class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-all duration-200 {{ request()->routeIs('admin.orders') ? 'bg-purple-100 text-purple-700 shadow-sm' : 'text-gray-700' }}">
-                            <i class="fa-solid fa-cube w-5 h-5 mr-3 {{ request()->routeIs('admin.orders.*') ? 'text-purple-600' : 'text-gray-500' }}"></i>
+                            <i
+                                class="fa-solid fa-cube w-5 h-5 mr-3 {{ request()->routeIs('admin.orders.*') ? 'text-purple-600' : 'text-gray-500' }}"></i>
                             <span class="text-sm font-medium">Orders</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.courses.index') }}"
                             class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-all duration-200 {{ request()->routeIs('admin.courses.*') ? 'bg-purple-100 text-purple-700 shadow-sm' : 'text-gray-700' }}">
-                            <i class="fas fa-book w-5 h-5 mr-3 {{ request()->routeIs('admin.courses.*') ? 'text-purple-600' : 'text-gray-500' }}"></i>
+                            <i
+                                class="fas fa-book w-5 h-5 mr-3 {{ request()->routeIs('admin.courses.*') ? 'text-purple-600' : 'text-gray-500' }}"></i>
                             <span class="text-sm font-medium">Courses</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.categories.index') }}"
                             class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-all duration-200 {{ request()->routeIs('admin.categories.*') ? 'bg-purple-100 text-purple-700 shadow-sm' : 'text-gray-700' }}">
-                            <i class="fas fa-tag w-5 h-5 mr-3 {{ request()->routeIs('admin.categories.*') ? 'text-purple-600' : 'text-gray-500' }}"></i>
+                            <i
+                                class="fas fa-tag w-5 h-5 mr-3 {{ request()->routeIs('admin.categories.*') ? 'text-purple-600' : 'text-gray-500' }}"></i>
                             <span class="text-sm font-medium">Categories</span>
                         </a>
                     </li>
@@ -111,19 +128,31 @@
         <!-- Main Content -->
         <div class="flex-1 ml-64 p-8 overflow-y-auto">
             @if (session('success'))
-            <div class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-lg mb-6 shadow-sm animate-fade-in-up">
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle mr-3 text-green-500"></i>
-                    <p>{{ session('success') }}</p>
+                <div
+                    class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-lg mb-6 shadow-sm animate-fade-in-up">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-3 text-green-500"></i>
+                        <p>{{ session('success') }}</p>
+                    </div>
                 </div>
-            </div>
+            @endif
+
+            @if($errors->any())
+                <div class="mb-4 p-4 rounded-lg bg-red-50 text-red-700 text-sm">
+                    <ul class="list-disc pl-5 space-y-1">
+                        @foreach($errors->all() as $e)
+                            <li>{{ $e }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
             @yield('content')
         </div>
     </div>
 
     <!-- Modal Template -->
-    <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50 hidden" id="modal-container">
+    <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50 hidden"
+        id="modal-container">
         <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
         <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
@@ -143,8 +172,10 @@
 
                 <!-- Modal Footer -->
                 <div class="flex justify-end pt-2 gap-2" id="modal-footer">
-                    <button class="modal-close px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors">Cancel</button>
-                    <button id="modal-confirm" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Confirm</button>
+                    <button
+                        class="modal-close px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors">Cancel</button>
+                    <button id="modal-confirm"
+                        class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Confirm</button>
                 </div>
             </div>
         </div>
@@ -200,18 +231,20 @@
 
         // Global function to handle delete confirmations
         window.confirmDelete = (formId, message) => {
-            openModal('Confirm Deletion', message || 'Are you sure you want to delete this item? This action cannot be undone.', () => {
-                document.getElementById(formId).submit();
-            });
+            openModal('Confirm Deletion', message ||
+                'Are you sure you want to delete this item? This action cannot be undone.', () => {
+                    document.getElementById(formId).submit();
+                });
             return false;
         };
 
         // Global function to handle course detail deletion
         window.confirmDeleteDetail = (element, message) => {
-            openModal('Confirm Deletion', message || 'Are you sure you want to delete this detail? This action cannot be undone.', () => {
-                element.closest('.course-detail').remove();
-                updateDetailIndices();
-            });
+            openModal('Confirm Deletion', message ||
+                'Are you sure you want to delete this detail? This action cannot be undone.', () => {
+                    element.closest('.course-detail').remove();
+                    updateDetailIndices();
+                });
             return false;
         };
     </script>

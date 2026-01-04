@@ -92,7 +92,7 @@ class VNPayController extends Controller
                 // Create order (use extracted user id if available)
                 $order = Order::create([
                     'user_id' => $userId,
-                    'vnpay_order_id' => $inputData['vnp_TxnRef'],
+                        'vnpay_order_id' => $inputData['vnp_TxnRef'],
                     'amount' => $inputData['vnp_Amount'] / 100,
                     'order_info' => $inputData['vnp_OrderInfo'],
                     'transaction_no' => $inputData['vnp_TransactionNo'],
@@ -187,7 +187,7 @@ class VNPayController extends Controller
     //                 // Create order and order details
     //                 $order = Order::create([
     //                     'user_id' => $user_id, // Use extracted user ID
-    //                     'vnpay_order_id' => $vnp_TxnRef,
+        //                     'vnpay_order_id' => $vnp_TxnRef,
     //                     'amount' => $vnp_Amount,
     //                     'order_info' => $inputData['vnp_OrderInfo'],
     //                     'transaction_no' => $inputData['vnp_TransactionNo'],

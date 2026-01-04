@@ -1,6 +1,6 @@
 /.phpunit.cache
 /node_modules
-/public/build
+#/public/build
 /public/hot
 /public/storage
 /storage/*.key
@@ -19,5 +19,13 @@ yarn-error.log
 /.fleet
 /.idea
 /.nova
+
 /.vscode
 /.zed
+
+# Local docker-compose overrides
+docker-compose.override.yml
+
+# Local env variants
+.env.local
+.env.testing

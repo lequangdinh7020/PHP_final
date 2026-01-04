@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('vnpay_order_id')->nullable();
+            $table->string('paypal_order_id')->nullable();
             $table->decimal('amount', 10, 2)->nullable();
             $table->text('order_info')->nullable();
             $table->string('transaction_no')->nullable();

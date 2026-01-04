@@ -17,6 +17,35 @@ class CourseSeeder extends Seeder
         }
 
         $courses = [
+            // Programming courses
+            [
+                'name' => 'Lập trình PHP cơ bản',
+                'category_id' => ($categories->where('name', 'Lập trình')->first()->id ?? null),
+                'grade' => 'N/A',
+                'price' => 400000,
+                'is_deleted' => false,
+            ],
+            [
+                'name' => 'Lập trình JavaScript (ES6)',
+                'category_id' => ($categories->where('name', 'Lập trình')->first()->id ?? null),
+                'grade' => 'N/A',
+                'price' => 450000,
+                'is_deleted' => false,
+            ],
+            [
+                'name' => 'Python cho người mới bắt đầu',
+                'category_id' => ($categories->where('name', 'Lập trình')->first()->id ?? null),
+                'grade' => 'N/A',
+                'price' => 350000,
+                'is_deleted' => false,
+            ],
+            [
+                'name' => 'Lập trình Laravel - Xây dựng ứng dụng',
+                'category_id' => ($categories->where('name', 'Lập trình')->first()->id ?? null),
+                'grade' => 'N/A',
+                'price' => 600000,
+                'is_deleted' => false,
+            ],
             [
                 'name' => 'Toán 10',
                 'category_id' => $categories->where('name', 'Toán')->first()->id,
@@ -52,8 +81,20 @@ class CourseSeeder extends Seeder
                 'price' => 280000,
                 'is_deleted' => false,
             ],
+            
         ];
+        
+        $laptrinh = $categories->where('name', 'Lập trình')->first();
+        if (!$laptrinh) {
+            $laptrinh = Category::create(['name' => 'Lập trình']);
+            $categories = Category::all();
+        }
 
+        foreach ($courses as &$c) {
+            if (in_array($c['name'], ['Lập trình PHP cơ bản', 'Lập trình JavaScript (ES6)', 'Python cho người mới bắt đầu', 'Lập trình Laravel - Xây dựng ứng dụng'])) {
+                $c['category_id'] = $laptrinh->id;
+            }
+        }
         foreach ($courses as $course) {
             Course::create($course);
         }

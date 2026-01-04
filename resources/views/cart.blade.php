@@ -1,4 +1,20 @@
 <x-app-layout>
+    <style>
+        .btn-paypal-custom {
+            background-color: #FFC439 !important; /* !important forces it over any Tailwind defaults */
+            color: #003087 !important;
+        }
+        .btn-paypal-custom:hover {
+            background-color: #F4BB29 !important;
+        }
+        .btn-vnpay-custom {
+            background-color:blue !important;
+        }
+        .btn-vnpay-custom:hover {
+            background-color: #1447E6 !important;
+        }
+    </style>
+
     <div class="pt-20 pb-6 bg-gradient-to-r from-indigo-900 to-blue-900 text-white">
         <div class="container mx-auto px-4 md:px-6 lg:px-8">
             <h1 class="text-3xl md:text-4xl font-bold mb-2">Giỏ hàng của bạn</h1>
@@ -81,17 +97,36 @@
                                 <input type="hidden" name="amount" value="{{ $total }}">
                                 <input type="hidden" name="language" value="vn">
                                 
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                                    <a href="{{ route('category.index') }}" class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 rounded-full text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+                            <!-- Buttons Row: Flex column on mobile, Flex row on desktop -->
+                                <div class="flex flex-col md:flex-row gap-4 w-full">
+                                    
+                                    <!-- 1. Continue Shopping -->
+                                    <a href="{{ route('category.index') }}" class="flex-1 w-full inline-flex items-center justify-center px-6 py-3 border border-gray-300 rounded-full text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 h-12">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                                         </svg>
-                                        Tiếp tục mua sắm
+                                        Tiếp tục mua
                                     </a>
-                                    <button type="submit" class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-medium rounded-full shadow-md transition-colors duration-200">
-                                        Thanh toán ngay
+
+                                    <!-- 2. VNPay Button -->
+                                    <button type="submit" 
+                                            formaction="{{ route('vnpay.create-payment') }}"
+                                            class="btn-vnpay-custom flex-1 w-full inline-flex items-center justify-center px-6 py-3 text-white font-medium rounded-full shadow-md transition-colors duration-200 h-12">
+                                        <span class="font-bold tracking-wide">VNPAY</span>
+                                        <span class="mx-1 opacity-60">|</span>
+                                        <span class="text-sm">Thanh toán</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                        </svg>
+                                    </button>
+
+                                    <!-- 3. PayPal Button -->
+                                    <button type="submit" 
+                                            formaction="{{ route('paypal.create') }}"
+                                            class="btn-paypal-custom flex-1 w-full inline-flex items-center justify-center px-6 py-3 font-bold rounded-full shadow-md transition-colors duration-200 h-12">
+                                        <span class="italic">Pay</span><span>Pal</span>
+                                        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M7.076 21.337H4.75a.5.5 0 0 1-.5-.5V3.853a.5.5 0 0 1 .5-.5h6.675c3.7 0 6.03 1.96 6.03 5.1 0 3.5-2.35 5.6-5.6 5.6H9.15l-1.4 6.6a.5.5 0 0 1-.49.4v-.016zm2.6-12h2.5c1.4 0 2.3-.8 2.3-2.1 0-1.6-1.2-2.3-2.8-2.3h-2l-.2 1.2.2 3.2z"/>
                                         </svg>
                                     </button>
                                 </div>

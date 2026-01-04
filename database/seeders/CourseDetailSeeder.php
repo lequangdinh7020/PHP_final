@@ -17,6 +17,37 @@ class CourseDetailSeeder extends Seeder
         }
 
         $courseDetails = [
+            // Programming courses
+            [
+                'name' => 'PHP cơ bản - Tổng quan và cài đặt',
+                'course_id' => $courses->where('name', 'Lập trình PHP cơ bản')->first()->id,
+                'content' => 'https://www.youtube.com/watch?v=OK_JCtrrv-c',
+                'description' => 'Giới thiệu PHP, cài đặt môi trường và chạy chương trình đầu tiên',
+            ],
+            [
+                'name' => 'PHP - Làm việc với form và cơ sở dữ liệu',
+                'course_id' => $courses->where('name', 'Lập trình PHP cơ bản')->first()->id,
+                'content' => 'https://www.youtube.com/watch?v=OK_JCtrrv-c',
+                'description' => 'Xử lý form, kết nối MySQL và thao tác CRUD bằng PHP',
+            ],
+            [
+                'name' => 'JavaScript ES6 - Cơ bản đến nâng cao',
+                'course_id' => $courses->where('name', 'Lập trình JavaScript (ES6)')->first()->id,
+                'content' => 'https://www.youtube.com/watch?v=PkZNo7MFNFg',
+                'description' => 'Các tính năng ES6, hàm, promise và async/await',
+            ],
+            [
+                'name' => 'Python cho người mới bắt đầu - Tổng quan',
+                'course_id' => $courses->where('name', 'Python cho người mới bắt đầu')->first()->id,
+                'content' => 'https://www.youtube.com/watch?v=_uQrJ0TkZlc',
+                'description' => 'Cài đặt Python, cú pháp cơ bản và ví dụ thực hành',
+            ],
+            [
+                'name' => 'Laravel - Khởi tạo dự án và routing',
+                'course_id' => $courses->where('name', 'Lập trình Laravel - Xây dựng ứng dụng')->first()->id,
+                'content' => 'https://www.youtube.com/watch?v=ImtZ5yENzgE',
+                'description' => 'Tạo dự án Laravel, routing, controller và view cơ bản',
+            ],
             // Toán 10: 3 CourseDetail
             [
                 'name' => 'Giới thiệu Toán 10',

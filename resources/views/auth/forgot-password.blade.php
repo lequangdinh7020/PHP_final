@@ -37,14 +37,7 @@
                 <h2 class="text-3xl font-bold text-gray-800 text-center mb-2">Quên mật khẩu</h2>
                 <p class="text-gray-600 text-center mb-6">Nhập email của bạn để nhận liên kết đặt lại mật khẩu</p>
 
-                <div class="mb-6 p-4 bg-amber-50 rounded-lg border border-amber-100">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <p class="text-amber-600 font-medium">{{ __('Chức năng vẫn đang trong tình trạng phát triển') }}</p>
-                    </div>
-                </div>
+                <!-- Forgot-password is ready: enter email to receive reset link -->
 
                 <p class="mb-6 text-gray-600 text-center">
                     {{ __('Chúng tôi sẽ gửi link đến email của bạn để đặt lại mật khẩu cho bạn!') }}

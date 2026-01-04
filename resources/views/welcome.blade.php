@@ -45,8 +45,7 @@
                             <div class="bg-white/20 p-6 rounded-xl backdrop-blur-sm shadow-xl">
                                 <div class="relative">
                                     <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg blur-sm opacity-75 animate-pulse"></div>
-                                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Students learning" class="rounded-lg shadow-2xl relative z-10">
-                                </div>
+                                        <img src="{{ asset('learning-1.jpg') }}" alt="Students learning" class="rounded-lg shadow-2xl relative z-10">                                </div>
                                 <div class="grid grid-cols-3 gap-4 mt-6">
                                     <div class="bg-white/20 p-4 rounded-lg backdrop-blur-sm shadow-lg">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">

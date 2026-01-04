@@ -4,17 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Course extends Model
 {
     use HasFactory;
+    use Sluggable;
 
     protected $fillable = [
         'name',
         'category_id',
         'grade',
         'price',
-        'is_deleted'
+        'is_deleted',
+        'description'
     ];
 
     protected $casts = [
@@ -46,5 +50,20 @@ class Course extends Model
     public function scopeNotDeleted($query)
     {
         return $query->where('is_deleted', false);
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name', // Take the 'name' field and turn it into 'slug'
+                'onUpdate' => true, // Update slug if name changes? (Optional)
+            ]
+        ];
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
